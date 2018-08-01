@@ -8,7 +8,7 @@ import { removeExpense } from '../actions/expenses';
 const DashboardPage = (state) => {
     const children = state.expenses.map((x, key) => {
         const rmFunc = () => state.dispatch(removeExpense(x.id))
-        return <ExpenseListItem key={key} amount={x.amount} createdAt={x.createdAt} remove={rmFunc}>{x.description}</ExpenseListItem>
+        return <ExpenseListItem key={key} {...x} remove={rmFunc}>{x.description}</ExpenseListItem>
     })
     return (
         <div>

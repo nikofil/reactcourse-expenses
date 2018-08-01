@@ -4,12 +4,22 @@ import 'react-dates/lib/css/_datepicker.css'
 import moment from 'moment'
 
 export default class ExpenseForm extends React.Component {
-    state = {
-        description: '',
-        amount: 0,
-        note: '',
-        createdAt: moment(),
-        error: null,
+    constructor(props) {
+        super(props)
+
+        const expense = {...props.expense} || {}
+        if (expense.createdAt !== undefined) {
+            expense.createdAt = moment(expense.createdAt)
+        }
+
+        this.state = {
+            description: '',
+            amount: 0,
+            note: '',
+            createdAt: moment(),
+            error: null,
+            ...expense,
+        }
     }
 
     onDescChange = (e) => {
@@ -35,12 +45,12 @@ export default class ExpenseForm extends React.Component {
 
     onSubmit = (e) => {
         e.preventDefault()
-        const { description, amount, note, createdAt } = this.state
+        const { id, description, amount, note, createdAt } = this.state
         if (!description || !amount) {
             this.setState(() => ({error: 'Please set description and amount'}))
         } else {
             this.setState(() => ({error: null}))
-            const obj = { description, amount, note, createdAt: createdAt.valueOf() }
+            const obj = { id, description, amount, note, createdAt: createdAt.valueOf() }
             this.props.submit(obj)
         }
     }

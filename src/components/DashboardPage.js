@@ -5,7 +5,7 @@ import ExpenseListItem from './ExpenseListItem';
 import ExpenseListFilters from './ExpenseListFilters';
 import { removeExpense } from '../actions/expenses';
 
-const DashboardPage = (state) => {
+export const DashboardPage = (state) => {
     const children = state.expenses.map((x, key) => {
         return <ExpenseListItem key={key} {...x}>{x.description}</ExpenseListItem>
     })

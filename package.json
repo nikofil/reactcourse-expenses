@@ -6,10 +6,12 @@
   "author": "Nikos Filippakis <aesmade@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "start": "node server/server.js",
     "serve": "webpack-dev-server",
     "build": "webpack --watch",
     "prod": "webpack -p --env production",
-    "test": "jest"
+    "test": "jest",
+    "heroku-postbuild": "yarn prod"
   },
   "jest": {
     "testURL": "http://localhost",
@@ -34,6 +36,7 @@
     "enzyme-to-json": "^3.3.4",
     "eslint": "^5.0.1",
     "eslint-plugin-react": "^7.10.0",
+    "express": "^4.16.3",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "jest": "^23.4.2",
     "moment": "^2.22.2",

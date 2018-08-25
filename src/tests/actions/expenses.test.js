@@ -25,7 +25,6 @@ test('should setup add new expense action object', () => {
     expect(action).toEqual({
         type: 'ADD_EXPENSE',
         expense: {
-            id: expect.any(String),
             ...data
         }
     })

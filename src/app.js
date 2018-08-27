@@ -12,9 +12,7 @@ import * as filterActions from './actions/filters'
 import './firebase/firebase'
 
 const store = configureStore()
-store.dispatch(expensesActions.addExpense({description: 'desc', note: 'hello', amount: 123}))
-store.dispatch(expensesActions.addExpense({ description: 'water bill', amount: 1000}))
-store.dispatch(expensesActions.addExpense({ description: 'electr bill', amount: 500, createdAt: 500}))
 store.dispatch(filterActions.sortByAmount())
+store.dispatch(expensesActions.startSetExpenses())
 
 ReactDOM.render(<Provider store={store}><AppRouter /></Provider>, document.getElementById('app'))

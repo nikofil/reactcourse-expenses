@@ -37,3 +37,22 @@ export const editExpense = (id, updates) => ({
     id,
     updates,
 })
+
+export const setExpenses = (expenses) => ({
+    type: 'SET_EXPENSES',
+    expenses
+})
+
+export const startSetExpenses = () => {
+    return (dispatch) => database.ref('expenses').once('value', (snap) => {
+        const expenseList = []
+        snap.forEach((child) => {
+            const val = child.val()
+            expenseList.push({
+                ...val,
+                id: child.key
+            })
+        })
+        return dispatch(setExpenses(expenseList))
+    })
+}

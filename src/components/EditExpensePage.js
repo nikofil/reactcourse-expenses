@@ -1,17 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import ExpenseForm from './ExpenseForm'
-import { editExpense, removeExpense } from '../actions/expenses';
+import { startEditExpense, startRemoveExpense } from '../actions/expenses';
 
 const EditExpensePage = (props) => {
     const submit = (obj) => {
-        props.dispatch(editExpense(obj.id, obj))
-        props.history.push('/')
+        props.dispatch(startEditExpense(obj.id, obj)).then(() => (
+            props.history.push('/')
+        ))
     }
 
     const remove = () => {
-        props.dispatch(removeExpense(props.match.params.id))
-        props.history.push('/')
+        props.dispatch(startRemoveExpense(props.match.params.id)).then(() => (
+            props.history.push('/')
+        ))
     }
 
     return (

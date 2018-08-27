@@ -116,3 +116,46 @@ test('should fetch expenses from firebase', (done) => {
         })
     }).then(done)
 })
+
+test('should edit expense in firebase', (done) => {
+    const store = createMockStore({})
+    database.ref('expenses').once('child_added', (child) => {
+        const val = child.val()
+        const id = child.key
+        store.dispatch(expense.startEditExpense(id, {
+            description: 'edited'
+        })).then(() => {
+            expect(store.getActions()[0]).toEqual({
+                type: 'EDIT_EXPENSE',
+                id,
+                updates: {
+                    description: 'edited'
+                }
+            })
+            database.ref(`expenses/${id}`).once('value', (exp) => {
+                expect(exp.val().description).toEqual('edited')
+                done()
+            })
+        })
+    })
+})
+
+test('should remove expense in firebase', (done) => {
+    const store = createMockStore({})
+    database.ref('expenses').once('child_added', (child) => {
+        const id = child.key
+        database.ref('expenses').once('value', (expenses) => {
+            expect(expenses.hasChild(id)).toBe(true)
+            store.dispatch(expense.startRemoveExpense(id)).then(() => {
+                expect(store.getActions()[0]).toEqual({
+                    type: 'REMOVE_EXPENSE',
+                    id
+                })
+                database.ref('expenses').once('value', (expenses) => {
+                    expect(expenses.hasChild(id)).toBe(false)
+                    done()
+                })
+            })
+        })
+    })
+})

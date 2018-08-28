@@ -27,5 +27,8 @@ exports[`should render the Header 1`] = `
   >
     Help
   </NavLink>
+  <button>
+    Log out
+  </button>
 </header>
 `;

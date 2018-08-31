@@ -9,7 +9,7 @@ test('should render the Header', () => {
 
 test('should log out on button click', () => {
     const logoutSpy = jest.fn()
-    const wrapper = shallow(<Header startLogout={ logoutSpy } />)
+    const wrapper = shallow(<Header isAuthenticated={true} startLogout={ logoutSpy } />)
     wrapper.find('button').at(0).simulate('click')
     expect(logoutSpy).toHaveBeenCalled()
 })

@@ -1,4 +1,3 @@
-import uuid from 'uuid'
 import database from '../firebase/firebase'
 
 // ADD_EXPENSE
@@ -8,7 +7,7 @@ export const addExpense = (expense) => ({
 })
 
 export const startAddExpense = (expenseData = {}) => {
-    return (dispatch) => {
+    return (dispatch, getState) => {
         const {
             description = '',
             note = '',
@@ -16,7 +15,8 @@ export const startAddExpense = (expenseData = {}) => {
             createdAt = 0,
         } = expenseData
         const expense = { description, note, amount, createdAt }
-        return database.ref('expenses').push(expense).then((ref) => (
+        const uid = getState().auth.uid
+        return database.ref(`users/${uid}/expenses`).push(expense).then((ref) => (
             dispatch(addExpense({
                 id: ref.key,
                 ...expense
@@ -32,7 +32,10 @@ export const removeExpense = (id) => ({
 })
 
 export const startRemoveExpense = (id) => (
-    (dispatch) => database.ref(`expenses/${id}`).remove().then(() => dispatch(removeExpense(id)))
+    (dispatch, getState) => {
+        const uid = getState().auth.uid
+        return database.ref(`users/${uid}/expenses/${id}`).remove().then(() => dispatch(removeExpense(id)))
+    }
 )
 
 // EDIT_EXPENSE
@@ -43,7 +46,10 @@ export const editExpense = (id, updates) => ({
 })
 
 export const startEditExpense = (id, updates) => (
-    (dispatch) => database.ref(`expenses/${id}`).update(updates).then(() => dispatch(editExpense(id, updates)))
+    (dispatch, getState) => {
+        const uid = getState().auth.uid
+        return database.ref(`users/${uid}/expenses/${id}`).update(updates).then(() => dispatch(editExpense(id, updates)))
+    }
 )
 
 // SET_EXPENSES
@@ -53,15 +59,18 @@ export const setExpenses = (expenses) => ({
 })
 
 export const startSetExpenses = () => {
-    return (dispatch) => database.ref('expenses').once('value', (snap) => {
-        const expenseList = []
-        snap.forEach((child) => {
-            const val = child.val()
-            expenseList.push({
-                ...val,
-                id: child.key
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid
+        return database.ref(`users/${uid}/expenses`).once('value', (snap) => {
+            const expenseList = []
+            snap.forEach((child) => {
+                const val = child.val()
+                expenseList.push({
+                    ...val,
+                    id: child.key
+                })
             })
+            return dispatch(setExpenses(expenseList))
         })
-        return dispatch(setExpenses(expenseList))
-    })
+    }
 }

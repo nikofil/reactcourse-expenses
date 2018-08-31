@@ -1,10 +1,21 @@
 import moment from 'moment'
 
+const restoredFilters = JSON.parse(window.localStorage.filters || null) || {}
+
+if (restoredFilters.startDate) {
+    restoredFilters.startDate = moment(restoredFilters.startDate)
+}
+
+if (restoredFilters.endDate) {
+    restoredFilters.endDate = moment(restoredFilters.endDate)
+}
+
 const filtersReducerDefaultState = {
     text: '',
-    sortBy: 'date',
+    sortBy: 'amount',
     startDate: moment().startOf('month'),
     endDate: moment().endOf('month'),
+    ...restoredFilters,
 }
 
 export default (state = filtersReducerDefaultState, action) => {

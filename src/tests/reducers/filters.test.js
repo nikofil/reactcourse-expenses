@@ -5,7 +5,7 @@ test('should setup initial state', () => {
     const state = filtersReducer(undefined, {})
     expect(state).toEqual({
         text: '',
-        sortBy: 'date',
+        sortBy: 'amount',
         startDate: moment().startOf('month'),
         endDate: moment().endOf('month'),
     })

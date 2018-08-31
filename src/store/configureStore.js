@@ -6,8 +6,8 @@ import thunk from 'redux-thunk'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-export default () => (
-    createStore(
+export default () => {
+    const store = createStore(
         combineReducers({
             expenses: expensesReducer,
             filters: filtersReducer,
@@ -15,4 +15,8 @@ export default () => (
         }),
         composeEnhancers(applyMiddleware(thunk))
     )
-)
+    store.subscribe(() => {
+        window.localStorage.filters = JSON.stringify(store.getState().filters)
+    })
+    return store
+}

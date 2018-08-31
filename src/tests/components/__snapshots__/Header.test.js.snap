@@ -8,16 +8,9 @@ exports[`should render the Header 1`] = `
   <NavLink
     activeClassName="is-active"
     aria-current="page"
-    to="/dashboard"
+    to="/"
   >
-    Dashboard
-  </NavLink>
-  <NavLink
-    activeClassName="is-active"
-    aria-current="page"
-    to="/create"
-  >
-    Create
+    Login
   </NavLink>
   <NavLink
     activeClassName="is-active"
@@ -26,8 +19,5 @@ exports[`should render the Header 1`] = `
   >
     Help
   </NavLink>
-  <button>
-    Log out
-  </button>
 </header>
 `;

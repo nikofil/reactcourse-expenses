@@ -13,7 +13,6 @@ import { firebase } from './firebase/firebase'
 import { login, logout } from './actions/auth'
 
 const store = configureStore()
-store.dispatch(filterActions.sortByAmount())
 
 let hasRendered = false
 const renderApp = () => {

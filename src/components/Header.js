@@ -3,18 +3,26 @@ import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { startLogout } from '../actions/auth'
 
-export const Header = ({ startLogout }) => (
+export const Header = ({ isAuthenticated, startLogout }) => (
     <header>
         <h1>Expensify app</h1>
-        <NavLink to="/dashboard" activeClassName="is-active">Dashboard</NavLink>
-        <NavLink to="/create" activeClassName="is-active">Create</NavLink>
+        { isAuthenticated ? (
+            <NavLink to="/dashboard" activeClassName="is-active">Dashboard</NavLink>
+        ) : (
+            <NavLink to="/" activeClassName="is-active">Login</NavLink>
+        ) }
+        { isAuthenticated ? <NavLink to="/create" activeClassName="is-active">Create</NavLink> : null }
         <NavLink to="/help" activeClassName="is-active">Help</NavLink>
-        <button onClick={ startLogout }>Log out</button>
+        { isAuthenticated ? <button onClick={ startLogout }>Log out</button> : null }
     </header>
 )
+
+const mapStateToProps = (state) => ({
+    isAuthenticated: !!state.auth.uid
+})
 
 const mapDispatchToProps = {
     startLogout
 }
 
-export default connect(undefined, mapDispatchToProps)(Header)
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

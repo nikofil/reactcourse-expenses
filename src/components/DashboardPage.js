@@ -12,7 +12,6 @@ export const DashboardPage = (state) => {
     })
     return (
         <div>
-            <div>Dashboard</div>
             <ExpenseSummary expenses={ state.expenses } />
             <ExpenseListFilters />
             <div>{children}</div>

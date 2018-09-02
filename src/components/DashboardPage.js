@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import getVisibleExpenses from '../selectors/expenses';
 import ExpenseListItem from './ExpenseListItem';
+import ExpenseSummary from './ExpenseSummary';
 import ExpenseListFilters from './ExpenseListFilters';
 import { removeExpense } from '../actions/expenses';
 
@@ -12,8 +13,9 @@ export const DashboardPage = (state) => {
     return (
         <div>
             <div>Dashboard</div>
-            <div>{children}</div>
+            <ExpenseSummary expenses={ state.expenses } />
             <ExpenseListFilters />
+            <div>{children}</div>
         </div>
     )
 }

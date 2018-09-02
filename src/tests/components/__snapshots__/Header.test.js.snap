@@ -1,23 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render the Header 1`] = `
-<header>
-  <h1>
-    Expensify app
-  </h1>
-  <NavLink
-    activeClassName="is-active"
-    aria-current="page"
-    to="/"
+<header
+  className="header"
+>
+  <div
+    className="content-container"
   >
-    Login
-  </NavLink>
-  <NavLink
-    activeClassName="is-active"
-    aria-current="page"
-    to="/help"
-  >
-    Help
-  </NavLink>
+    <div
+      className="header__content"
+    >
+      <Link
+        className="header__title"
+        replace={false}
+        to="/dashboard"
+      >
+        <h1>
+          Expensify
+        </h1>
+      </Link>
+      <button
+        className="button"
+      >
+        Log out
+      </button>
+    </div>
+  </div>
 </header>
 `;

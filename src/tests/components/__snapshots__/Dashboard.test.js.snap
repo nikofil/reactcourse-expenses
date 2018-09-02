@@ -5,6 +5,23 @@ exports[`should render Dashboard with expenses 1`] = `
   <div>
     Dashboard
   </div>
+  <Component
+    expenses={
+      Array [
+        Object {
+          "amount": 123,
+          "createdAt": 1000,
+          "description": "desc1",
+        },
+        Object {
+          "amount": 100,
+          "createdAt": 2000,
+          "description": "desc2",
+        },
+      ]
+    }
+  />
+  <Connect(ExpenseListFilters) />
   <div>
     <Component
       amount={123}
@@ -23,6 +40,5 @@ exports[`should render Dashboard with expenses 1`] = `
       desc2
     </Component>
   </div>
-  <Connect(ExpenseListFilters) />
 </div>
 `;

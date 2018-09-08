@@ -11,10 +11,13 @@ import * as expensesActions from './actions/expenses'
 import * as filterActions from './actions/filters'
 import { firebase } from './firebase/firebase'
 import { login, logout } from './actions/auth'
+import LoadingPage from './components/LoadingPage'
 
 const store = configureStore()
 
 let hasRendered = false
+ReactDOM.render(<LoadingPage />, document.getElementById('app'))
+
 const renderApp = () => {
     if (!hasRendered) {
         hasRendered = true

@@ -17,9 +17,16 @@ const EditExpensePage = (props) => {
     }
 
     return (
-        <div>Editing: { props.match.params.id }
-            <ExpenseForm expense={props.expense} submit={submit} />
-            <button onClick={remove}>Remove</button>
+        <div>
+            <div className="page-header">
+                <div className="content-container">
+                    <h1 className="page-header__title">Editing expense</h1>
+                </div>
+            </div>
+            <div className="content-container">
+                <ExpenseForm expense={props.expense} submit={submit} />
+                <button className="button button--secondary" onClick={remove}>Remove</button>
+            </div>
         </div>
     )
 }

@@ -2,9 +2,6 @@
 
 exports[`should render Dashboard with expenses 1`] = `
 <div>
-  <div>
-    Dashboard
-  </div>
   <Component
     expenses={
       Array [
@@ -22,23 +19,48 @@ exports[`should render Dashboard with expenses 1`] = `
     }
   />
   <Connect(ExpenseListFilters) />
-  <div>
-    <Component
-      amount={123}
-      createdAt={1000}
-      description="desc1"
-      key="0"
+  <div
+    className="content-container"
+  >
+    <div
+      className="list-header"
     >
-      desc1
-    </Component>
-    <Component
-      amount={100}
-      createdAt={2000}
-      description="desc2"
-      key="1"
+      <div
+        className="show-for-mobile"
+      >
+        Expenses
+      </div>
+      <div
+        className="show-for-desktop"
+      >
+        Expense
+      </div>
+      <div
+        className="show-for-desktop"
+      >
+        Amount
+      </div>
+    </div>
+    <div
+      className="list-body"
     >
-      desc2
-    </Component>
+      <Component
+        amount={123}
+        createdAt={1000}
+        description="desc1"
+        key="0"
+      >
+        desc1
+      </Component>
+      <Component
+        amount={100}
+        createdAt={2000}
+        description="desc2"
+        key="1"
+      >
+        desc2
+      </Component>
+    </div>
   </div>
 </div>
 `;

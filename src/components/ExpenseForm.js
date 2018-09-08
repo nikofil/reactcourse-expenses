@@ -56,21 +56,16 @@ export default class ExpenseForm extends React.Component {
 
     render() {
         return (
-            <div>
-            <form onSubmit={this.onSubmit}>
-            <div>
-            <input type="text" placeholder="Description" value={this.state.description} onChange={this.onDescChange} autoFocus />
-            </div><div>
-            <input type="number" placeholder="Amount" value={this.state.amount} onChange={this.onAmountChange} />
-            </div><div>
-            <textarea value={this.state.note} onChange={this.onNoteChange} placeholder="Note"></textarea>
-            </div><div>
-            <SingleDatePicker date={this.state.createdAt} onDateChange={this.onDateChange} focused={this.state.focused} onFocusChange={ ({focused}) => this.setState({focused}) } />
-            </div>
-            <p>{this.state.error}</p>
-            <input type="submit" value="Submit" />
+            <form className="form" onSubmit={this.onSubmit}>
+                { this.state.error && <p className="form__error">{this.state.error}</p> }
+                <input className="text-input" type="text" placeholder="Description" value={this.state.description} onChange={this.onDescChange} autoFocus />
+                <input className="text-input" type="number" placeholder="Amount" value={this.state.amount} onChange={this.onAmountChange} />
+                <textarea className="textarea" value={this.state.note} onChange={this.onNoteChange} placeholder="Note"></textarea>
+                <SingleDatePicker date={this.state.createdAt} onDateChange={this.onDateChange} focused={this.state.focused} onFocusChange={ ({focused}) => this.setState({focused}) } />
+                <div>
+                    <input className="button" type="submit" value="Submit" />
+                </div>
             </form>
-            </div>
         )
     }
 }

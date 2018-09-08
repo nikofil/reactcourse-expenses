@@ -20,7 +20,7 @@ exports[`should render the Header 1`] = `
         </h1>
       </Link>
       <button
-        className="button"
+        className="button button--link"
       >
         Log out
       </button>

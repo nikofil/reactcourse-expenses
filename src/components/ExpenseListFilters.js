@@ -14,14 +14,20 @@ class ExpenseListFilters extends React.Component {
     render() {
         const props = this.props
         return (
-            <div>
-                <input type="text" value={props.filters.text} onChange={(e) => props.dispatch(setTextFilter(e.target.value))} />
-                <select value={props.filters.sortBy} onChange={(e) => props.dispatch(e.target.value == 'amount' ? sortByAmount() : sortByDate())}>
-                    <option value="date">Date</option>
-                    <option value="amount">Amount</option>
-                </select>
-                <div>
-                    <DateRangePicker displayFormat="YYYY/MM/DD" startDate={props.filters.startDate} endDate={props.filters.endDate} onDatesChange={this.onDatesChange} focusedInput={this.state.rangeFocus} onFocusChange={(rangeFocus) => this.setState({rangeFocus})} />
+            <div className="content-container">
+                <div className="input-group">
+                    <div className="input-group__item">
+                        <input className="text-input" placeholder="Search expenses" type="text" value={props.filters.text} onChange={(e) => props.dispatch(setTextFilter(e.target.value))} />
+                    </div>
+                    <div className="input-group__item">
+                        <select className="select" value={props.filters.sortBy} onChange={(e) => props.dispatch(e.target.value == 'amount' ? sortByAmount() : sortByDate())}>
+                            <option value="date">Date</option>
+                            <option value="amount">Amount</option>
+                        </select>
+                    </div>
+                    <div className="input-group__item">
+                        <DateRangePicker displayFormat="YYYY/MM/DD" startDate={props.filters.startDate} endDate={props.filters.endDate} onDatesChange={this.onDatesChange} focusedInput={this.state.rangeFocus} onFocusChange={(rangeFocus) => this.setState({rangeFocus})} />
+                    </div>
                 </div>
             </div>
         )
